@@ -1,9 +1,9 @@
-const mongoose=require('mongoose');
+const {Schema,model}=require('mongoose');
 
-const schema=mongoose.Schema({
+const schema=Schema({
     creator:{
-        type:String,
-        required:true,
+        type:Schema.Types.ObjectId,
+        ref:"User",
     },
     title:{
         type:String,
@@ -18,4 +18,4 @@ const schema=mongoose.Schema({
         required:true,
     },
 })
-module.exports=mongoose.model("Blog",schema);
+module.exports=model("Blog",schema);
