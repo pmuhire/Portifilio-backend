@@ -6,16 +6,16 @@ const editUser=async(req,res)=>{
         const user = await User.findOne({ _id: req.params.id })
     
         if (req.body.fullNames) {
-            user.title = req.body.title
+            user.fullNames = req.body.fullNames
         }
     
         if (req.body.userName) {
-            user.content = req.body.content
+            user.userName = req.body.userName
         }
         
         if (req.body.password) {
             const hashed=await hashPassword(req.body.password);
-            user.password = hashed;
+            user.password = hashed;          
         }
     
         await user.save()

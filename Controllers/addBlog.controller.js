@@ -34,8 +34,8 @@ const addBlog=async (req,res)=>{
         await registerBlog.save();
     res.send(registerBlog);
    }catch(err){
-        console.log(err);
-        return res.json({error:"Something went wrong"})
+        // console.log(err);
+        return res.json({err:"Something went wrong"})
    }
 }
 module.exports=addBlog;
