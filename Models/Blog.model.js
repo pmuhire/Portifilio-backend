@@ -1,6 +1,17 @@
 const {Schema,model}=require('mongoose');
 
 const schema=Schema({
+    tags:{
+        type:Array,
+        required:true
+    },
+    enableComments:{
+        type:Boolean,
+        required:true
+    },
+    metaTitle:{
+       type:String
+    },
     creator:{
         type:Schema.Types.ObjectId,
         ref:"User",
