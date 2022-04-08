@@ -3,7 +3,7 @@ const hashPassword = require('../utils/hashPassword');
 
 const editUser=async(req,res)=>{
     try {
-        const user = await User.findOne({ _id: req.params.id })
+        const user = await User.findByIdAndUpdate({ _id: req.params.id })
     
         if (req.body.fullNames) {
             user.fullNames = req.body.fullNames
@@ -11,6 +11,9 @@ const editUser=async(req,res)=>{
     
         if (req.body.userName) {
             user.userName = req.body.userName
+        }
+        if (req.body.email) {
+            user.email = req.body.email
         }
         
         if (req.body.password) {

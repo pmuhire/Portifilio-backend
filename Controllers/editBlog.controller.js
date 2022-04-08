@@ -1,7 +1,7 @@
 const Blog =require("../Models/Blog.model");
 const editBlog=async (req,res)=>{
     try {
-        const blog = await Blog.findOne({ _id: req.params.id })
+        const blog = await Blog.findByIdAndUpdate({ _id: req.params.id })
     
         if (req.body.title) {
             blog.title = req.body.title
@@ -10,6 +10,7 @@ const editBlog=async (req,res)=>{
         if (req.body.content) {
             blog.content = req.body.content
         }
+        
     
         await blog.save()
         res.send(blog)
