@@ -1,6 +1,7 @@
 const Blog =require("../Models/Blog.model");
 
-const addBlog=async (req,res)=>{
+// ADD A BLOG
+exports.addBlog=async (req,res)=>{
     // console.log(req.userId);
     const {title,content,imageUrl,enableComments,tags,metaTitle}=req.body
     const err={};
@@ -38,4 +39,51 @@ const addBlog=async (req,res)=>{
         return res.json({err:"Something went wrong"})
    }
 }
-module.exports=addBlog;
+
+// GET ALL BLOGS
+exports.getBlogs=async (req,res)=>{
+    const blogs=await Blog.find();
+    res.send(blogs);
+}
+
+// GET A BLOG
+exports.getBlog=async(req,res)=>{
+    const blog = await Blog.find({_id: req.params.id});
+    return res.send(blog)
+}
+
+// EDIT BLOG
+exports.editBlog=async (req,res)=>{
+    try {
+        const blog = await Blog.findByIdAndUpdate({ _id: req.params.id })
+    
+        if (req.body.title) {
+            blog.title = req.body.title
+        }
+    
+        if (req.body.content) {
+            blog.content = req.body.content
+        }
+        
+    
+        await blog.save()
+        res.send(blog)
+    } catch {
+        res.status(404)
+        res.send({ error: "Post doesn't exist!" })
+    }
+}
+
+// DELETE A BLOG
+
+exports.deleteBlog=async(req,res)=>{
+    try {
+        console.log(req.params.id);
+        const blog= await Blog.findByIdAndRemove({ _id: req.params.id })
+        console.log(blog);
+        res.status(204).send(blog);
+    } catch {
+        res.status(404)
+        res.send({ error: "Post doesn't exist!" })
+    }
+}

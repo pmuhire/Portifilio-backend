@@ -1,18 +1,17 @@
+require("dotenv").config();
 const express=require('express');
 const mongoose=require('mongoose');
-const userRouter=require("./routes/userRouter");
-const blogRouter=require("./routes/blogRoutes");
+const router=require("./routes/routes")
 
-mongoose.connect("mongodb://localhost:27017/portifolio", {
+mongoose.connect(process.env.Database, {
     useNewUrlParser: false,
 }).then(()=>{
     const app=express();
 
     app.use(express.json());
-    app.use("/user-api",userRouter);
-    app.use("/blog-api",blogRouter);
+    app.use("/api",router);
 
-    app.listen("1200",()=>{
+    app.listen(process.env.Port,()=>{
         console.log("Server up and running");
     })
 })
