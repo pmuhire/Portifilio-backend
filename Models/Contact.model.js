@@ -1,7 +1,7 @@
-const {Schema,model}=require('mongoose');
+const mongoose=require('mongoose');
 require('mongoose-type-email');
 
-const contactSchema=new Schema({
+const contactSchema=new mongoose.Schema({
     names:{
         type:String,
         required:true
@@ -20,4 +20,4 @@ const contactSchema=new Schema({
     }
 })
 
-module.exports=model("Contact",contactSchema);
+module.exports=mongoose.model("Contact",contactSchema);

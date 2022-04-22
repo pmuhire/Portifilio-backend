@@ -3,7 +3,6 @@ const hashPassword = require('../utils/hashPassword');
 
 // Create User
 exports.userSignup=async (req,res)=>{
-    console.log(req.body);
   const {fullNames,userName,email,password}=req.body
   let error={};
   if(!fullNames||fullNames.trim().length===0){
@@ -24,14 +23,14 @@ exports.userSignup=async (req,res)=>{
 
   try{
       const user=await User.findOne({email});
-      if(user) res.status(400).json({error:"Email already exists"})
+      if(user) return res.send({error:"Email already exists"})
        const hashed=await hashPassword(req.body.password);
-      const registerUser=new User({
+       const registerUser=new User({
           fullNames:req.body.fullNames,
           userName:req.body.userName,
           email:req.body.email,
           password:hashed
-      })
+       })
       await registerUser.save();
     res.send(registerUser);
   }catch(err){
@@ -43,13 +42,12 @@ exports.userSignup=async (req,res)=>{
 
 // Get All Users
 exports.getUsers=async (req,res)=>{
-    console.log(req.body);
     const users=await User.find();
-    res.send(users);
+    return res.send(users);
 }
 // Get a user
 exports.getUser=async(req,res)=>{
-    const user = await Blog.find({id: req.params.id});
+    const user = await User.findOne({id: req.params.id});
     return res.send(user)
 }
 // Edit user
@@ -74,19 +72,17 @@ exports.editUser=async(req,res)=>{
         }
     
         await user.save()
-        res.send(user)
+        return res.send(user)
     } catch {
-        res.status(404)
-        res.send({ error: "user doesn't exist!" })
+        return res.status(404).send({ error: "user doesn't exist!" })
     }
 }
 // Delete user
 exports.deleteUser=async(req,res)=>{
     try {
-        await User.findByIdAndRemove({ _id: req.params.id })
-        res.status(204).send();
+        const user=await User.findByIdAndRemove({ _id: req.params.id })
+        return res.status(204).send(user);
     } catch {
-        res.status(404)
-        res.send({ error: "User doesn't exist!" })
+        res.status(404).send({ error: "User doesn't exist!" })
     }
 }
