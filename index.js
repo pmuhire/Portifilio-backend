@@ -11,7 +11,7 @@ mongoose.connect(process.env.Database, {
     app.use(express.json());
     app.use("/api",router);
 
-    app.listen(process.env.Port,()=>{
+    app.listen(process.env.Port||5000,()=>{
         console.log("Server up and running");
     })
 })
