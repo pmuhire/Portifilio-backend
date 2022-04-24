@@ -9,7 +9,7 @@ exports.userSignup=async (req,res)=>{
       error.name="Enter your full names";
   }
   if(!userName||userName.trim().length===0){
-    error.name="Enter your full names";
+    error.name="Enter your full username";
 }
   if(!email||email.trim().length===0){
       error.email="Enter your Email";

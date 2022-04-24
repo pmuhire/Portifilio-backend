@@ -3,7 +3,37 @@ const router=express.Router();
 const authMiddleware=require("../middleware/authMiddleware");
 
 const {userSignup,getUser,getUsers,deleteUser,editUser}=require("../Controllers/User.controller");
-
+/**
+ * @swagger
+ *  /api/user:
+ *     post:
+ *        description: Use to create all user
+ *        summary: Register User
+ *        responses:
+ *          200:
+ *             description: A successful response 
+ *        requestBody:
+ *             content:
+ *                parameters:
+ *                   in: body
+ *                   name: user
+ *                   description: a new user
+ *                   schema:
+ *                     type: object
+ *                     properties: 
+ *                        full names: 
+ *                          type: string
+ *                          required: true
+ *                        email: 
+ *                          type: string
+ *                          required: true
+ *                        password:
+ *                          type: string
+ *                          required: true  
+ *                        username:
+ *                          type: string
+ *                          required: true  
+ */
 router.post("/user",userSignup);
 router.get("/users",getUsers);
 router.get("/users/:id",getUser);
