@@ -200,60 +200,139 @@ module.exports = {
         },
       },
      },
-     "/users/{id}":{
-      put: {
-        tags: ["Users"], 
-        description: "Update user",  
-        parameters:  [
-          {
-            name:"id",
-            in:"path",
-            description:"Id of a user",
-            required:true,
-            type:"string"
-          },
-          {
-            name:"Full Names",
-            in:"body",
-            description:"full Names of a user",
-            type:"string"
-          },
-          {
-            name:"User name",
-            in:"body",
-            description:"Username of a user",
-            type:"string"
-          },
-          {
-            name:"Password",
-            in:"body",
-            description:"password of a user",
-            type:"string"
-          },
-          {
-            name:"Email",
-            in:"body",
-            description:"Email of a user",
-            type:"string"
+    //  "/users/{id}":{
+    //   put: {
+    //     tags: ["Users"], 
+    //     description: "Update user",  
+    //     parameters:  [
+    //       {
+    //         name:"id",
+    //         in:"path",
+    //         description:"Id of a user",
+    //         required:true,
+    //         type:"string"
+    //       },
+    //       {
+    //         name:"Full Names",
+    //         in:"body",
+    //         description:"full Names of a user",
+    //         type:"string"
+    //       },
+    //       {
+    //         name:"User name",
+    //         in:"body",
+    //         description:"Username of a user",
+    //         type:"string"
+    //       },
+    //       {
+    //         name:"Password",
+    //         in:"body",
+    //         description:"password of a user",
+    //         type:"string"
+    //       },
+    //       {
+    //         name:"Email",
+    //         in:"body",
+    //         description:"Email of a user",
+    //         type:"string"
+    //       }
+    //     ],
+    //     // expected responses
+    //     responses: {
+    //       // response code
+    //       200: {
+    //         description: "User updated successfully", // response desc.
+    //       },
+    //       // response code
+    //       404: {
+    //         description: "User not found", // response desc.
+    //       },
+    //       // response code
+    //       500: {
+    //         description: "Server error", // response desc.
+    //       },
+    //     },
+    //   },
+    //  },
+     "/user": {
+      "post": {
+          "tags": [
+              "Users"
+          ],
+          "summary": "Save new User",
+          "description": "Save new User",
+          "consumes": [
+              "application/json"
+          ],
+          "produces": [
+              "application/json"
+          ],
+          "parameters": [
+              {
+              "in": "body",
+              "name": "body",
+              "description": "Course object that needs to be added to the database",
+              "required": true,
+              "schema": {
+                  $ref: "#/components/schemas/User",
+              }
+          }],
+          "responses": {
+              "201": {
+                  "description": "successful operation",
+                  "schema": {
+                    $ref: "#/components/schemas/User",
+                  }
+              }
           }
-        ],
-        // expected responses
-        responses: {
-          // response code
-          200: {
-            description: "User updated successfully", // response desc.
-          },
-          // response code
-          404: {
-            description: "User not found", // response desc.
-          },
-          // response code
-          500: {
-            description: "Server error", // response desc.
-          },
-        },
       },
-     },
+    },
+    "/users/{id}":{
+      "put": {
+          "tags": [
+              "Users"
+          ],
+          "summary": "Update existing User",
+          "description": "Update existing User",
+          "consumes": [
+              "application/json"
+          ],
+          "produces": [
+              "application/json"
+          ],
+          "parameters": [
+            {
+              name:"id",
+              in:"path",
+              description:"Id of a user",
+              required:true,
+              type:"string"
+            },
+            {
+              "in": "body",
+              "name": "body",
+              "description": "User object that needs to be added to the database",
+              "required": true,
+              "schema": {
+                   $ref: "#/components/schemas/User",
+              }
+          }],
+          responses: {
+            // response code
+            200: {
+              description: "User updated successfully", // response desc.
+            },
+            // response code
+            404: {
+              description: "User not found", // response desc.
+            },
+            // response code
+            500: {
+              description: "Server error", // response desc.
+            },
+          },
+          
+      },
+  },
    },
-   
 };
