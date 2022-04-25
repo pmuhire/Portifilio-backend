@@ -553,5 +553,129 @@ module.exports = {
           }
       },
     },
+
+    // Contact APIs DOCUMENTATION
+    "/messages":{
+      get: {
+        tags: ["Contact"],
+        "summary": "Get  Messages", 
+        description: "Get Messages", 
+        parameters: [], 
+        responses: {
+          200: {
+            description: "Messages were obtained",
+            content: {
+              "application/json": {
+                schema: {
+                  $ref: "#/components/schemas/Contact",
+                },
+              },
+            },
+          },
+        },
+      },
+     },
+     "/message": {
+      "post": {
+          "tags": [
+              "Contact"
+          ],
+          "summary": "Send new Message",
+          "description": "Send new Blog",
+          "consumes": [
+              "application/json"
+          ],
+          "produces": [
+              "application/json"
+          ],
+          "parameters": [],
+        requestBody: {
+          // expected request body
+          content: {
+            // content-type
+            "application/json": {
+              schema: {
+                $ref: "#/components/schemas/Contact", 
+              },
+            },
+          },
+        },
+          "responses": {
+            200: {
+              description: "Message sent successfully", // response desc.
+            },
+           
+            // response code
+            500: {
+              description: "Server error", // response desc.
+            },
+          }
+      },
+    },
+    "/messages/{id}":{
+      get: {
+        tags: ["Contact"],
+        "summary": "Get a Message", 
+        description: "Get a Message", 
+        parameters: [
+          {
+            name:"id",
+            in:"path",
+            description:"Id of a Message",
+            required:true,
+            type:"string"
+          }
+        ], 
+        responses: {
+          200: {
+            description: "Message was received",
+            content: {
+              "application/json": {
+                schema: {
+                  $ref: "#/components/schemas/Contact",
+                },
+              },
+            },
+          },
+        },
+      },
+     },
+     "/messages/delete/{id}":{
+      "delete": {
+          "tags": [
+              "Contact"
+          ],
+          "summary": "Delete a message",
+          "description": "Delete Message",
+          "consumes": [
+              "application/json"
+          ],
+          "produces": [
+              "application/json"
+          ],
+          "parameters": [
+            {
+              name:"id",
+              in:"path",
+              description:"Id of a message",
+              required:true,
+              type:"string"
+            }],
+          responses: {
+            // response code
+            200: {
+              description: "Message deleted successfully", // response desc.
+            },
+            // response code
+            404: {
+              description: "Message not found", // response desc.
+            },
+            // response code
+            500: {
+              description: "Server error", // response desc.
+            },
+          }, 
+      },
+    },
    },
 };
