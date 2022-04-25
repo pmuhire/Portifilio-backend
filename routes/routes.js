@@ -3,42 +3,11 @@ const router=express.Router();
 const authMiddleware=require("../middleware/authMiddleware");
 
 const {userSignup,getUser,getUsers,deleteUser,editUser}=require("../Controllers/User.controller");
-/**
- * @swagger
- *  /api/user:
- *     post:
- *        description: Use to create all user
- *        summary: Register User
- *        responses:
- *          200:
- *             description: A successful response 
- *        requestBody:
- *             content:
- *                parameters:
- *                   in: body
- *                   name: user
- *                   description: a new user
- *                   schema:
- *                     type: object
- *                     properties: 
- *                        full names: 
- *                          type: string
- *                          required: true
- *                        email: 
- *                          type: string
- *                          required: true
- *                        password:
- *                          type: string
- *                          required: true  
- *                        username:
- *                          type: string
- *                          required: true  
- */
 router.post("/user",userSignup);
 router.get("/users",getUsers);
 router.get("/users/:id",getUser);
-router.delete("/users/:id",authMiddleware,deleteUser);
-router.patch("/users/:id",authMiddleware,editUser);
+router.delete("/users/delete/:id",authMiddleware,deleteUser);
+router.patch("/users/update/:id",authMiddleware,editUser);
 
 // BLOG ROUTES
 const {
@@ -52,8 +21,8 @@ const {
   router.post("/blog", addBlog);
   router.get("/blogs", getBlogs);
   router.get("/blogs/:id", getBlog);
-  router.delete("/blogs/:id",authMiddleware, deleteBlog);
-  router.patch("/blogs/:id",authMiddleware, editBlog);
+  router.delete("/blogs/delete/:id",authMiddleware, deleteBlog);
+  router.patch("/blogs/update/:id",authMiddleware, editBlog);
 
   const {auth}=require("../Controllers/auth.controller")
   router.post("/login",auth);
@@ -62,5 +31,5 @@ const {
   router.get("/messages",getMessages);
   router.get("/messages/:id",getMessage);
   router.post("/message",postMessage);
-  router.delete("/messages/:id",deleteMessage);
+  router.delete("/messages/delete/:id",deleteMessage);
 module.exports=router;

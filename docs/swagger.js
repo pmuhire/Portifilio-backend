@@ -38,11 +38,11 @@ module.exports = {
           User: {
             type: "object", // data type
             properties: {
-                id: {
-                  type: "string", 
-                  description: "Identification number", 
-                  example: "ytyVgh", 
-                },
+                // id: {
+                //   type: "string", 
+                //   description: "Identification number", 
+                //   example: "ytyVgh", 
+                // },
                 fullNames: {
                   type: "string", 
                   description: "Users full Names", 
@@ -53,7 +53,7 @@ module.exports = {
                   description: "Users email", 
                   example: "pmuhire2002@gmail.com", // example of a completed value
                 },
-                username: {
+                userName: {
                     type: "string", // data type
                     description: "Users username", 
                     example: "pmuhire2002", // example of a completed value
@@ -96,7 +96,7 @@ module.exports = {
                 content:{
                   type: "string", 
                   description: "Content of the blog", 
-                  example: "HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH", 
+                  example: "Working with nodejs", 
                 },
                 imageUrl:{
                     type: "string", 
@@ -105,7 +105,7 @@ module.exports = {
                 },
             },
           },
-          // Todo input model
+          // Contact Model
           Contact: {
             type: "object", // data type
             properties: {
@@ -135,6 +135,17 @@ module.exports = {
                 }
             },
           },
+          "Login": {
+            "type": "object",
+            "properties": {
+                "email": {
+                    "type": "string"
+                },
+                "password": {
+                    "type": "string"
+                }
+            }
+        },
           // error model
           Error: {
             type: "object", //data type
@@ -156,7 +167,8 @@ module.exports = {
    paths:{
      "/users":{
       get: {
-        tags: ["Users"], 
+        tags: ["Users"],
+        "summary": "Get  Users", 
         description: "Get Users", 
         parameters: [], 
         responses: {
@@ -173,87 +185,6 @@ module.exports = {
         },
       },
      },
-     "/users/{id}":{
-      get: {
-        tags: ["Users"], 
-        description: "Get a User", 
-        parameters: [
-          {
-            name:"id",
-            in:"path",
-            description:"Id of a user",
-            required:true,
-            type:"string"
-          }
-        ], 
-        responses: {
-          200: {
-            description: "Users were obtained",
-            content: {
-              "application/json": {
-                schema: {
-                  $ref: "#/components/schemas/User",
-                },
-              },
-            },
-          },
-        },
-      },
-     },
-    //  "/users/{id}":{
-    //   put: {
-    //     tags: ["Users"], 
-    //     description: "Update user",  
-    //     parameters:  [
-    //       {
-    //         name:"id",
-    //         in:"path",
-    //         description:"Id of a user",
-    //         required:true,
-    //         type:"string"
-    //       },
-    //       {
-    //         name:"Full Names",
-    //         in:"body",
-    //         description:"full Names of a user",
-    //         type:"string"
-    //       },
-    //       {
-    //         name:"User name",
-    //         in:"body",
-    //         description:"Username of a user",
-    //         type:"string"
-    //       },
-    //       {
-    //         name:"Password",
-    //         in:"body",
-    //         description:"password of a user",
-    //         type:"string"
-    //       },
-    //       {
-    //         name:"Email",
-    //         in:"body",
-    //         description:"Email of a user",
-    //         type:"string"
-    //       }
-    //     ],
-    //     // expected responses
-    //     responses: {
-    //       // response code
-    //       200: {
-    //         description: "User updated successfully", // response desc.
-    //       },
-    //       // response code
-    //       404: {
-    //         description: "User not found", // response desc.
-    //       },
-    //       // response code
-    //       500: {
-    //         description: "Server error", // response desc.
-    //       },
-    //     },
-    //   },
-    //  },
      "/user": {
       "post": {
           "tags": [
@@ -268,27 +199,41 @@ module.exports = {
               "application/json"
           ],
           "parameters": [
-              {
-              "in": "body",
-              "name": "body",
-              "description": "Course object that needs to be added to the database",
-              "required": true,
-              "schema": {
-                  $ref: "#/components/schemas/User",
-              }
-          }],
+              // {
+              // "in": "body",
+              // "name": "body",
+              // "description": "User object that needs to be added to the database",
+              // "required": true,
+              // "schema": {
+              //     $ref: "#/components/schemas/User",
+              // }
+          // }
+        ],
+        requestBody: {
+          // expected request body
+          content: {
+            // content-type
+            "application/json": {
+              schema: {
+                $ref: "#/components/schemas/User", 
+              },
+            },
+          },
+        },
           "responses": {
-              "201": {
-                  "description": "successful operation",
-                  "schema": {
-                    $ref: "#/components/schemas/User",
-                  }
-              }
+            200: {
+              description: "User added successfully", // response desc.
+            },
+           
+            // response code
+            500: {
+              description: "Server error", // response desc.
+            },
           }
       },
     },
-    "/users/{id}":{
-      "put": {
+    "/users/update/{id}":{
+      "patch": {
           "tags": [
               "Users"
           ],
@@ -330,9 +275,242 @@ module.exports = {
             500: {
               description: "Server error", // response desc.
             },
-          },
-          
+          }, 
       },
-  },
+    },
+    "/users/{id}":{
+      get: {
+        tags: ["Users"],
+        "summary": "Get a User", 
+        description: "Get a User", 
+        parameters: [
+          {
+            name:"id",
+            in:"path",
+            description:"Id of a user",
+            required:true,
+            type:"string"
+          }
+        ], 
+        responses: {
+          200: {
+            description: "Users were obtained",
+            content: {
+              "application/json": {
+                schema: {
+                  $ref: "#/components/schemas/User",
+                },
+              },
+            },
+          },
+        },
+      },
+     },
+     "/users/delete/{id}":{
+      "delete": {
+          "tags": [
+              "Users"
+          ],
+          "summary": "Delete a User",
+          "description": "Delete User",
+          "consumes": [
+              "application/json"
+          ],
+          "produces": [
+              "application/json"
+          ],
+          "parameters": [
+            {
+              name:"id",
+              in:"path",
+              description:"Id of a user",
+              required:true,
+              type:"string"
+            }],
+          responses: {
+            // response code
+            200: {
+              description: "User updated successfully", // response desc.
+            },
+            // response code
+            404: {
+              description: "User not found", // response desc.
+            },
+            // response code
+            500: {
+              description: "Server error", // response desc.
+            },
+          }, 
+      },
+    },
+
+    "/blogs":{
+      get: {
+        tags: ["Blogs"],
+        "summary": "Get  Blogs", 
+        description: "Get Blogs", 
+        parameters: [], 
+        responses: {
+          200: {
+            description: "Blogs were obtained",
+            content: {
+              "application/json": {
+                schema: {
+                  $ref: "#/components/schemas/Blog",
+                },
+              },
+            },
+          },
+        },
+      },
+     },
+     "/blog": {
+      "post": {
+          "tags": [
+              "Blogs"
+          ],
+          "summary": "Save new Blog",
+          "description": "Save new Blog",
+          "consumes": [
+              "application/json"
+          ],
+          "produces": [
+              "application/json"
+          ],
+          "parameters": [],
+        requestBody: {
+          // expected request body
+          content: {
+            // content-type
+            "application/json": {
+              schema: {
+                $ref: "#/components/schemas/Blog", 
+              },
+            },
+          },
+        },
+          "responses": {
+            200: {
+              description: "Blog added successfully", // response desc.
+            },
+           
+            // response code
+            500: {
+              description: "Server error", // response desc.
+            },
+          }
+      },
+    },
+    "/blogs/update/{id}":{
+      "patch": {
+          "tags": [
+              "Blogs"
+          ],
+          "summary": "Update existing Blog",
+          "description": "Update existing Blog",
+          "consumes": [
+              "application/json"
+          ],
+          "produces": [
+              "application/json"
+          ],
+          "parameters": [
+            {
+              name:"id",
+              in:"path",
+              description:"Id of a Blog",
+              required:true,
+              type:"string"
+            },
+            {
+              "in": "body",
+              "name": "body",
+              "description": "Blog object that needs to be added to the database",
+              "required": true,
+              "schema": {
+                   $ref: "#/components/schemas/Blog",
+              }
+          }],
+          responses: {
+            // response code
+            200: {
+              description: "Blog updated successfully", // response desc.
+            },
+            // response code
+            404: {
+              description: "Blog not found", // response desc.
+            },
+            // response code
+            500: {
+              description: "Server error", // response desc.
+            },
+          }, 
+      },
+    },
+    "/blogs/{id}":{
+      get: {
+        tags: ["Blogs"],
+        "summary": "Get a Blog", 
+        description: "Get a Blog", 
+        parameters: [
+          {
+            name:"id",
+            in:"path",
+            description:"Id of a Blog",
+            required:true,
+            type:"string"
+          }
+        ], 
+        responses: {
+          200: {
+            description: "Blog was obtained",
+            content: {
+              "application/json": {
+                schema: {
+                  $ref: "#/components/schemas/Blog",
+                },
+              },
+            },
+          },
+        },
+      },
+     },
+     "/blogs/delete/{id}":{
+      "delete": {
+          "tags": [
+              "Blogs"
+          ],
+          "summary": "Delete a Blog",
+          "description": "Delete Blog",
+          "consumes": [
+              "application/json"
+          ],
+          "produces": [
+              "application/json"
+          ],
+          "parameters": [
+            {
+              name:"id",
+              in:"path",
+              description:"Id of a Blog",
+              required:true,
+              type:"string"
+            }],
+          responses: {
+            // response code
+            200: {
+              description: "Blog updated successfully", // response desc.
+            },
+            // response code
+            404: {
+              description: "Blog not found", // response desc.
+            },
+            // response code
+            500: {
+              description: "Server error", // response desc.
+            },
+          }, 
+      },
+    },
    },
 };
