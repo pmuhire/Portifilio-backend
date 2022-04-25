@@ -28,8 +28,8 @@ const {
   router.post("/login",auth);
 
   const {postMessage,getMessage,getMessages,deleteMessage}=require("../Controllers/contact.controller");
-  router.get("/messages",getMessages);
-  router.get("/messages/:id",getMessage);
-  router.post("/message",postMessage);
-  router.delete("/messages/delete/:id",deleteMessage);
+  router.get("/messages",authMiddleware,getMessages);
+  router.get("/messages/:id",authMiddleware,getMessage);
+  router.post("/message",authMiddleware,postMessage);
+  router.delete("/messages/delete/:id",authMiddleware,deleteMessage);
 module.exports=router;
