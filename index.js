@@ -1,14 +1,16 @@
 require("dotenv").config();
 const express=require('express');
 const mongoose=require('mongoose');
-const router=require("./routes/routes")
-
+const router=require("./routes/routes");
+const swaggerUiExpress = require('swagger-ui-express');
+const docs = require('./docs/swagger');
 mongoose.connect(process.env.Database, {
     useNewUrlParser: false,
 }).then(()=>{
     const app=express();
 
     app.use(express.json());
+    app.use('/api-docs',swaggerUiExpress.serve,swaggerUiExpress.setup(docs));
     app.use("/api",router);
 
     app.listen(process.env.Port||5000,()=>{

@@ -3,12 +3,11 @@ const router=express.Router();
 const authMiddleware=require("../middleware/authMiddleware");
 
 const {userSignup,getUser,getUsers,deleteUser,editUser}=require("../Controllers/User.controller");
-
 router.post("/user",userSignup);
 router.get("/users",getUsers);
 router.get("/users/:id",getUser);
-router.delete("/users/:id",authMiddleware,deleteUser);
-router.patch("/users/:id",authMiddleware,editUser);
+router.delete("/users/delete/:id",authMiddleware,deleteUser);
+router.patch("/users/update/:id",authMiddleware,editUser);
 
 // BLOG ROUTES
 const {
@@ -22,8 +21,8 @@ const {
   router.post("/blog", addBlog);
   router.get("/blogs", getBlogs);
   router.get("/blogs/:id", getBlog);
-  router.delete("/blogs/:id",authMiddleware, deleteBlog);
-  router.patch("/blogs/:id",authMiddleware, editBlog);
+  router.delete("/blogs/delete/:id",authMiddleware, deleteBlog);
+  router.patch("/blogs/update/:id",authMiddleware, editBlog);
 
   const {auth}=require("../Controllers/auth.controller")
   router.post("/login",auth);
@@ -32,5 +31,5 @@ const {
   router.get("/messages",getMessages);
   router.get("/messages/:id",getMessage);
   router.post("/message",postMessage);
-  router.delete("/messages/:id",deleteMessage);
+  router.delete("/messages/delete/:id",deleteMessage);
 module.exports=router;
