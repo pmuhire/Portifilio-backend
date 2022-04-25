@@ -165,6 +165,7 @@ module.exports = {
         },
     },
    paths:{
+    //  USERS APIs DOCUMENTATION
      "/users":{
       get: {
         tags: ["Users"],
@@ -344,6 +345,7 @@ module.exports = {
       },
     },
 
+    // BLOGS APIs DOCUMENTATION
     "/blogs":{
       get: {
         tags: ["Blogs"],
@@ -510,6 +512,45 @@ module.exports = {
               description: "Server error", // response desc.
             },
           }, 
+      },
+    },
+
+    // login 
+    "/login": {
+      "post": {
+          "tags": [
+              "Auth"
+          ],
+          "summary": "Login",
+          "description": "Login",
+          "consumes": [
+              "application/json"
+          ],
+          "produces": [
+              "application/json"
+          ],
+          "parameters": [],
+        requestBody: {
+          // expected request body
+          content: {
+            // content-type
+            "application/json": {
+              schema: {
+                $ref: "#/components/schemas/Login", 
+              },
+            },
+          },
+        },
+          "responses": {
+            200: {
+              description: "Loged in successfully", // response desc.
+            },
+           
+            // response code
+            500: {
+              description: "Server error", // response desc.
+            },
+          }
       },
     },
    },
