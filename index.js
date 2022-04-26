@@ -16,4 +16,6 @@ mongoose.connect(process.env.Database, {
     app.listen(process.env.Port||5000,()=>{
         console.log("Server up and running");
     })
+    module.exports=app
 })
+
