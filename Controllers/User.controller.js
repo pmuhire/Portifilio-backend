@@ -23,7 +23,7 @@ exports.userSignup=async (req,res)=>{
 
   try{
       const user=await User.findOne({email});
-      if(user) return res.send({error:"Email already exists"})
+      if(user) return res.status(404).send({error:"Email already exists"})
        const hashed=await hashPassword(req.body.password);
        const registerUser=new User({
           fullNames:req.body.fullNames,
@@ -32,7 +32,7 @@ exports.userSignup=async (req,res)=>{
           password:hashed
        })
       await registerUser.save();
-    res.send(registerUser);
+    return res.send(registerUser);
   }catch(err){
       console.log(err);
       return res.status(500).json({error:"Something went wrong"})
@@ -47,8 +47,11 @@ exports.getUsers=async (req,res)=>{
 }
 // Get a user
 exports.getUser=async(req,res)=>{
-    const user = await User.findOne({id: req.params.id});
-    return res.send(user)
+    const user = await  User.findById(req.params.id);
+    if(!user){
+        return res.status(404).send("User does not exist")
+    }
+    return res.status(200).send(user)
 }
 // Edit user
 exports.editUser=async(req,res)=>{
@@ -72,7 +75,7 @@ exports.editUser=async(req,res)=>{
         }
     
         await user.save()
-        return res.send(user)
+        return res.status(200).send(user)
     } catch {
         return res.status(404).send({ error: "user doesn't exist!" })
     }
