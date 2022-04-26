@@ -1,10 +1,11 @@
 {
   "name": "portifilio-backend",
   "version": "1.0.0",
-  "description": "",
+  "description": "My  Brand App APIs",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon index.js"
+    "start": "nodemon index.js",
+    "test": "mocha"
   },
   "keywords": [],
   "author": "Muhire Patrick",
@@ -24,5 +25,10 @@
   },
   "engines": {
     "node": "^16.13.0"
+  },
+  "devDependencies": {
+    "chai": "^4.3.6",
+    "chai-http": "^4.3.0",
+    "mocha": "^9.2.2"
   }
 }
