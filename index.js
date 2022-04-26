@@ -4,7 +4,7 @@ const mongoose=require('mongoose');
 const router=require("./routes/routes");
 const swaggerUiExpress = require('swagger-ui-express');
 const docs = require('./docs/swagger');
-mongoose.connect(process.env.Database, {
+mongoose.connect(process.env.MONGODB_URI, {
     useNewUrlParser: false,
 }).then(()=>{
     const app=express();
@@ -13,7 +13,7 @@ mongoose.connect(process.env.Database, {
     app.use('/api-docs',swaggerUiExpress.serve,swaggerUiExpress.setup(docs));
     app.use("/api",router);
 
-    app.listen(process.env.Port||5000,()=>{
+    app.listen(process.env.PORT||5000,()=>{
         console.log("Server up and running");
     })
     module.exports=app
