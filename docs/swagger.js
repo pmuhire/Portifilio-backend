@@ -17,6 +17,10 @@ module.exports = {
             url: "http://localhost:1200/api", // url
             description: "Local server", // name
         },
+        {
+             url:"https://my-brand-backend-app.herokuapp.com/api",
+             description:"Deployed server"
+        }
     ],
     tags: [
         {

@@ -1,4 +1,5 @@
 require("dotenv").config();
+const cors=require('cors');
 const express=require('express');
 const mongoose=require('mongoose');
 const router=require("./routes/routes");
@@ -9,6 +10,7 @@ mongoose.connect(process.env.MONGODB_URI, {
 }).then(()=>{
     const app=express();
 
+    app.use(cors);
     app.use(express.json());
     app.use('/api-docs',swaggerUiExpress.serve,swaggerUiExpress.setup(docs));
     app.use("/api",router);
