@@ -4,7 +4,7 @@ const mongoose=require('mongoose');
 const router=require("./routes/routes");
 const swaggerUiExpress = require('swagger-ui-express');
 const docs = require('./docs/swagger');
-mongoose.connect(process.env.Database, {
+mongoose.connect(process.env.MONGODB_URI, {
     useNewUrlParser: false,
 }).then(()=>{
     const app=express();
