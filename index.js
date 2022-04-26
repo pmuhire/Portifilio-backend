@@ -5,12 +5,16 @@ const mongoose=require('mongoose');
 const router=require("./routes/routes");
 const swaggerUiExpress = require('swagger-ui-express');
 const docs = require('./docs/swagger');
+const {corsFunction} = require("./utils/cors")
+
+
 mongoose.connect(process.env.MONGODB_URI, {
     useNewUrlParser: false,
 }).then(()=>{
     const app=express();
 
     app.use(cors());
+    app.use(corsFunction);
     app.use(express.json());
     app.use('/api-docs',swaggerUiExpress.serve,swaggerUiExpress.setup(docs));
     app.use("/api",router);
