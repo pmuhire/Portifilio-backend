@@ -105,6 +105,16 @@ module.exports = {
                 },
             },
           },
+
+          // TOKEN
+          Token: {
+            "type": "object",
+            "properties": {
+                "token": {
+                    "type": "string"
+                }
+            }
+        },
           // Contact Model
           Contact: {
             type: "object", // data type
@@ -163,6 +173,19 @@ module.exports = {
             },
           },
         },
+        securitySchemes:{
+          BearerAuth:{
+            type: "string",
+            scheme: "Token",
+          },
+          
+          Bearer:{
+            type: "string",
+            name: "Authorization",
+            in: "header"  
+          }
+        },
+        
     },
    paths:{
     //  USERS APIs DOCUMENTATION
@@ -234,10 +257,13 @@ module.exports = {
       },
     },
     "/users/update/{id}":{
-      "patch": {
+      "put": {
           "tags": [
               "Users"
           ],
+          "security":{
+              "Bearer": []
+          },
           "summary": "Update existing User",
           "description": "Update existing User",
           "consumes": [
@@ -678,4 +704,5 @@ module.exports = {
       },
     },
    },
+  
 };
