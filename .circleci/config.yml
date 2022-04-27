@@ -1,0 +1,5 @@
+version: 3.4.1
+jobs:
+    run_tests:
+            docker:
+                - image: cicleci/node 10
