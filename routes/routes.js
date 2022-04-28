@@ -32,4 +32,9 @@ const {
   router.get("/messages/:id",authMiddleware,getMessage);
   router.post("/message",authMiddleware,postMessage);
   router.delete("/messages/delete/:id",authMiddleware,deleteMessage);
+
+  // COMMENTS
+  const {createComment} =require("../Controllers/Comment.controller")
+  router.post("/blogs/:id",createComment)
+
 module.exports=router;

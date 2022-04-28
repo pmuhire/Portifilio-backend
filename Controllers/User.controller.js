@@ -32,6 +32,7 @@ exports.userSignup=async (req,res)=>{
           password:hashed
        })
       await registerUser.save();
+      console.log(registerUser)
     return res.send(registerUser);
   }catch(err){
       console.log(err);
