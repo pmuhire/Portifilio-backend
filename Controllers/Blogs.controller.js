@@ -4,7 +4,7 @@ const Comment=require("../Models/Comment")
 // ADD A BLOG
 exports.addBlog=async (req,res)=>{
     // console.log(req.userId);
-    const {title,content,imageUrl,enableComments,tags,metaTitle}=req.body
+    const {title,content,imageUrl,enableComments,tags,metaTitle,description}=req.body
     const err={};
     if(!title||title.trim().length===0){
          err.title="Enter title";
@@ -13,10 +13,10 @@ exports.addBlog=async (req,res)=>{
         err.title="Enter the content to Blog";
     }
     if(!imageUrl||imageUrl.trim().length===0){
-        err.title="Enter a cover Image";
+        err.coverImage="Enter a cover Image";
    }
    if(tags.length<=2){
-       err.tags="Enter atleast three tags";
+       err.tag="Enter atleast three tags";
    }
    if(Object.keys(err).length){
     return res.status(422).json({err});
@@ -31,7 +31,8 @@ exports.addBlog=async (req,res)=>{
             creator:req.userId,
             tags:tags,
             metaTitle:metaTitle,
-            enableComments:enableComments
+            enableComments:enableComments,
+            description: description
         })
         await registerBlog.save();
     res.send(registerBlog);
