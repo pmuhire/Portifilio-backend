@@ -17,6 +17,7 @@ describe("Users  APIs", () => {
       chai
         .request(server)
         .get("/api/users")
+        .set({Authorization:"Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MjZhMzNmMDVlMzMxYTQ3NjdkY2M1YTYiLCJlbWFpbCI6InBtdWhpcmUyMDAzQGdtYWlsLmNvbSIsInBhc3N3b3JkIjoiJDJiJDEwJHlZV1c1RGZEYTFVeEMudWpDdXEzaWUzZVpnVWN3MFhrdlJqVlYwLjlCSVhqc3lsR2RmSjhlIiwiaWF0IjoxNjUxMjc0NDg1fQ.gddMOjBlw42ABmynQzUx0SszppalcsnJiymcK124OCU"})
         .end((err, res) => {
           res.should.have.status(200);
           res.body.should.be.a("array");
@@ -42,6 +43,7 @@ describe("Users  APIs", () => {
       chai
         .request(server)
         .get("/api/users/" + userId)
+        .set({Authorization:"Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MjZhMzNmMDVlMzMxYTQ3NjdkY2M1YTYiLCJlbWFpbCI6InBtdWhpcmUyMDAzQGdtYWlsLmNvbSIsInBhc3N3b3JkIjoiJDJiJDEwJHlZV1c1RGZEYTFVeEMudWpDdXEzaWUzZVpnVWN3MFhrdlJqVlYwLjlCSVhqc3lsR2RmSjhlIiwiaWF0IjoxNjUxMjc0NDg1fQ.gddMOjBlw42ABmynQzUx0SszppalcsnJiymcK124OCU"})
         .end((err, res) => {
           res.should.have.status(200);
           res.body.should.be.a("object");
@@ -125,7 +127,7 @@ describe("Users  APIs", () => {
       chai
         .request(server)
         .patch("/api/users/update/"+userId)
-        .set({ Authorization: `${token}`})
+        .set({Authorization:"Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MjZhMzNmMDVlMzMxYTQ3NjdkY2M1YTYiLCJlbWFpbCI6InBtdWhpcmUyMDAzQGdtYWlsLmNvbSIsInBhc3N3b3JkIjoiJDJiJDEwJHlZV1c1RGZEYTFVeEMudWpDdXEzaWUzZVpnVWN3MFhrdlJqVlYwLjlCSVhqc3lsR2RmSjhlIiwiaWF0IjoxNjUxMjc0NDg1fQ.gddMOjBlw42ABmynQzUx0SszppalcsnJiymcK124OCU"})
         .send(user)
         .end((err, res) => {
           res.should.have.status(200);
@@ -150,7 +152,7 @@ describe("Users  APIs", () => {
       chai
         .request(server)
         .delete("/api/users/delete/"+userId)
-        .set({ Authorization: `${token}`})
+        .set({Authorization:"Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MjZhMzNmMDVlMzMxYTQ3NjdkY2M1YTYiLCJlbWFpbCI6InBtdWhpcmUyMDAzQGdtYWlsLmNvbSIsInBhc3N3b3JkIjoiJDJiJDEwJHlZV1c1RGZEYTFVeEMudWpDdXEzaWUzZVpnVWN3MFhrdlJqVlYwLjlCSVhqc3lsR2RmSjhlIiwiaWF0IjoxNjUxMjc0NDg1fQ.gddMOjBlw42ABmynQzUx0SszppalcsnJiymcK124OCU"})
         .end((err, res) => {
           res.should.have.status(200);
           done();

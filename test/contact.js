@@ -17,6 +17,7 @@ describe("Message APIs", () => {
       chai
         .request(server)
         .get("/api/messages")
+        .set({Authorization:"Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MjZhMzNmMDVlMzMxYTQ3NjdkY2M1YTYiLCJlbWFpbCI6InBtdWhpcmUyMDAzQGdtYWlsLmNvbSIsInBhc3N3b3JkIjoiJDJiJDEwJHlZV1c1RGZEYTFVeEMudWpDdXEzaWUzZVpnVWN3MFhrdlJqVlYwLjlCSVhqc3lsR2RmSjhlIiwiaWF0IjoxNjUxMjc0NDg1fQ.gddMOjBlw42ABmynQzUx0SszppalcsnJiymcK124OCU"})
         .end((err, res) => {
           res.should.have.status(200);
           res.body.should.be.a("array");
@@ -27,6 +28,7 @@ describe("Message APIs", () => {
       chai
         .request(server)
         .get("/api/message")
+        .set({Authorization:"Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MjZhMzNmMDVlMzMxYTQ3NjdkY2M1YTYiLCJlbWFpbCI6InBtdWhpcmUyMDAzQGdtYWlsLmNvbSIsInBhc3N3b3JkIjoiJDJiJDEwJHlZV1c1RGZEYTFVeEMudWpDdXEzaWUzZVpnVWN3MFhrdlJqVlYwLjlCSVhqc3lsR2RmSjhlIiwiaWF0IjoxNjUxMjc0NDg1fQ.gddMOjBlw42ABmynQzUx0SszppalcsnJiymcK124OCU"})
         .end((err, res) => {
           res.should.have.status(404);
           done();
@@ -38,10 +40,11 @@ describe("Message APIs", () => {
    */
   describe("Get /api/messages/:id", () => {
     it("It should GET a requested message", (done) => {
-      const messageId = "624c835f06fadea76fb63537";
+      const messageId = "626c60b70cbc98262116bb76";
       chai
         .request(server)
         .get("/api/messages/" + messageId)
+        .set({Authorization:"Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MjZhMzNmMDVlMzMxYTQ3NjdkY2M1YTYiLCJlbWFpbCI6InBtdWhpcmUyMDAzQGdtYWlsLmNvbSIsInBhc3N3b3JkIjoiJDJiJDEwJHlZV1c1RGZEYTFVeEMudWpDdXEzaWUzZVpnVWN3MFhrdlJqVlYwLjlCSVhqc3lsR2RmSjhlIiwiaWF0IjoxNjUxMjc0NDg1fQ.gddMOjBlw42ABmynQzUx0SszppalcsnJiymcK124OCU"})
         .end((err, res) => {
           res.should.have.status(200);
           res.body.should.be.a("object");
@@ -54,10 +57,11 @@ describe("Message APIs", () => {
         });
     });
     it("It should GET no Message", (done) => {
-      const messageId = "624c84e256176b40b53d7973";
+      const messageId = "52717fb721df1cc797851c10";
       chai
         .request(server)
         .get("/api/messages/" + messageId)
+        .set({Authorization:"Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MjZhMzNmMDVlMzMxYTQ3NjdkY2M1YTYiLCJlbWFpbCI6InBtdWhpcmUyMDAzQGdtYWlsLmNvbSIsInBhc3N3b3JkIjoiJDJiJDEwJHlZV1c1RGZEYTFVeEMudWpDdXEzaWUzZVpnVWN3MFhrdlJqVlYwLjlCSVhqc3lsR2RmSjhlIiwiaWF0IjoxNjUxMjc0NDg1fQ.gddMOjBlw42ABmynQzUx0SszppalcsnJiymcK124OCU"})
         .end((err, res) => {
           res.should.have.status(404);
           res.text.should.be.eq("Message does not exist");
@@ -80,7 +84,7 @@ describe("Message APIs", () => {
       chai
         .request(server)
         .post("/api/message")
-        .set({ Authorization: `${token}`})
+        .set({Authorization:"Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MjZhMzNmMDVlMzMxYTQ3NjdkY2M1YTYiLCJlbWFpbCI6InBtdWhpcmUyMDAzQGdtYWlsLmNvbSIsInBhc3N3b3JkIjoiJDJiJDEwJHlZV1c1RGZEYTFVeEMudWpDdXEzaWUzZVpnVWN3MFhrdlJqVlYwLjlCSVhqc3lsR2RmSjhlIiwiaWF0IjoxNjUxMjc0NDg1fQ.gddMOjBlw42ABmynQzUx0SszppalcsnJiymcK124OCU"})
         .send(contact)
         .end((err, res) => {
           res.should.have.status(200);
@@ -116,12 +120,13 @@ describe("Message APIs", () => {
   /**
    * Test the Delete route
    */
-   describe("Delete /api/messages/update/id", () => {
+   describe("Delete /api/messages/delete/id", () => {
     it("It should Delete a  message", (done) => {
-      const messageId="626798b15a1dcfe2cbd3753b"
+      const messageId="62717fb721df1cc797851c10"
       chai
         .request(server)
         .delete("/api/messages/delete/"+messageId)
+        .set({Authorization:"Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MjZhMzNmMDVlMzMxYTQ3NjdkY2M1YTYiLCJlbWFpbCI6InBtdWhpcmUyMDAzQGdtYWlsLmNvbSIsInBhc3N3b3JkIjoiJDJiJDEwJHlZV1c1RGZEYTFVeEMudWpDdXEzaWUzZVpnVWN3MFhrdlJqVlYwLjlCSVhqc3lsR2RmSjhlIiwiaWF0IjoxNjUxMjc0NDg1fQ.gddMOjBlw42ABmynQzUx0SszppalcsnJiymcK124OCU"})
         .end((err, res) => {
           res.should.have.status(200);
           done();
