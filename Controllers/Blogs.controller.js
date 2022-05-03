@@ -50,7 +50,7 @@ exports.getBlogs=async (req,res)=>{
 
 // GET A BLOG
 exports.getBlog=async(req,res)=>{
-    const blog = await Blog.find({_id: req.params.id});
+    const blog = await Blog.findOne({_id: req.params.id});
     return res.send(blog)
 }
 

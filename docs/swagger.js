@@ -293,6 +293,14 @@ module.exports = {
             "schema": {
               $ref: "#/components/schemas/User",
             }
+          },{
+            "in": "header",
+            "name": "Authorization",
+            "description": "bearer token for user authorization",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
           }],
         responses: {
           // response code
@@ -541,6 +549,62 @@ module.exports = {
           // response code
           500: {
             description: "Server error", // response desc.
+          },
+        },
+      },
+    },
+    "/blogs/{id}/comments": {
+      get: {
+        tags: ["Blogs"],
+        "summary": "Get a Blog comments",
+        description: "Get a Blog",
+        parameters: [
+          {
+            name: "id",
+            in: "path",
+            description: "Id of a Blog",
+            required: true,
+            type: "string"
+          }
+        ],
+        responses: {
+          200: {
+            description: "Blog comments were obtained",
+            content: {
+              "application/json": {
+                schema: {
+                  $ref: "#/components/schemas/Blog",
+                },
+              },
+            },
+          },
+        },
+      },
+    },
+    "/blogs/{id}/likes": {
+      get: {
+        tags: ["Blogs"],
+        "summary": "Get a Blog likes",
+        description: "Get a Blog likes",
+        parameters: [
+          {
+            name: "id",
+            in: "path",
+            description: "Id of a Blog",
+            required: true,
+            type: "string"
+          }
+        ],
+        responses: {
+          200: {
+            description: "Blog likes were obtained",
+            content: {
+              "application/json": {
+                schema: {
+                  $ref: "#/components/schemas/Blog",
+                },
+              },
+            },
           },
         },
       },
