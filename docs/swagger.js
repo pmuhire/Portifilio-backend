@@ -199,7 +199,17 @@ module.exports = {
         tags: ["Users"],
         "summary": "Get  Users",
         description: "Get Users",
-        parameters: [],
+        parameters: [
+          {
+            "in": "header",
+            "name": "Authorization",
+            "description": "bearer token for user authorization",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
         responses: {
           200: {
             description: "Users were obtained",
@@ -330,6 +340,15 @@ module.exports = {
             description: "Id of a user",
             required: true,
             type: "string"
+          },
+          {
+            "in": "header",
+            "name": "Authorization",
+            "description": "bearer token for user authorization",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
           }
         ],
         responses: {
@@ -366,6 +385,15 @@ module.exports = {
             description: "Id of a user",
             required: true,
             type: "string"
+          },
+          {
+            "in": "header",
+            "name": "Authorization",
+            "description": "bearer token for user authorization",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
           }],
         responses: {
           // response code
@@ -418,7 +446,17 @@ module.exports = {
         "produces": [
           "application/json"
         ],
-        "parameters": [],
+        "parameters": [
+          {
+            "in": "header",
+            "name": "Authorization",
+            "description": "bearer token for user authorization",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
         requestBody: {
           // expected request body
           content: {
@@ -470,6 +508,15 @@ module.exports = {
             "required": true,
             "schema": {
               $ref: "#/components/schemas/Blog",
+            }
+          },
+          {
+            "in": "header",
+            "name": "Authorization",
+            "description": "bearer token for user authorization",
+            "required": true,
+            "schema": {
+              "type": "string"
             }
           }],
         responses: {
@@ -536,6 +583,15 @@ module.exports = {
             description: "Id of a Blog",
             required: true,
             type: "string"
+          },
+          {
+            "in": "header",
+            "name": "Authorization",
+            "description": "bearer token for user authorization",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
           }],
         responses: {
           // response code
@@ -565,6 +621,15 @@ module.exports = {
             description: "Id of a Blog",
             required: true,
             type: "string"
+          },
+          {
+            "in": "header",
+            "name": "Authorization",
+            "description": "bearer token for user authorization",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
           }
         ],
         responses: {
@@ -593,6 +658,15 @@ module.exports = {
             description: "Id of a Blog",
             required: true,
             type: "string"
+          },
+          {
+            "in": "header",
+            "name": "Authorization",
+            "description": "bearer token for user authorization",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
           }
         ],
         responses: {
@@ -655,7 +729,17 @@ module.exports = {
         tags: ["Contact"],
         "summary": "Get  Messages",
         description: "Get Messages",
-        parameters: [],
+        parameters: [
+          {
+            "in": "header",
+            "name": "Authorization",
+            "description": "bearer token for user authorization",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
         responses: {
           200: {
             description: "Messages were obtained",
@@ -683,7 +767,17 @@ module.exports = {
         "produces": [
           "application/json"
         ],
-        "parameters": [],
+        "parameters": [
+          {
+            "in": "header",
+            "name": "Authorization",
+            "description": "bearer token for user authorization",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
         requestBody: {
           // expected request body
           content: {
@@ -719,6 +813,15 @@ module.exports = {
             description: "Id of a Message",
             required: true,
             type: "string"
+          },
+          {
+            "in": "header",
+            "name": "Authorization",
+            "description": "bearer token for user authorization",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
           }
         ],
         responses: {
@@ -755,6 +858,15 @@ module.exports = {
             description: "Id of a message",
             required: true,
             type: "string"
+          },
+          {
+            "in": "header",
+            "name": "Authorization",
+            "description": "bearer token for user authorization",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
           }],
         responses: {
           // response code
