@@ -32,8 +32,7 @@ exports.userSignup=async (req,res)=>{
           password:hashed
        })
       await registerUser.save();
-      console.log(registerUser)
-    return res.send(registerUser);
+    return res.status(200).send(registerUser);
   }catch(err){
       console.log(err);
       return res.status(500).json({error:"Something went wrong"})
@@ -85,7 +84,10 @@ exports.editUser=async(req,res)=>{
 exports.deleteUser=async(req,res)=>{
     try {
         const user=await User.findByIdAndRemove({ _id: req.params.id })
-        return res.status(204).send(user);
+        return res.status(200).json({
+            success:true,
+            message:`User ${req.params.id} deleted successfully`
+        })
     } catch {
         res.status(404).send({ error: "User doesn't exist!" })
     }

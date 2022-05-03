@@ -29,7 +29,7 @@ exports.auth = async (req, res) => {
     res.send({
       authToken: token,
     });
-    console.log(token);
+    //  console.log(token);
   });
 };
 function validate(req) {
