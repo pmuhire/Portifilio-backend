@@ -178,16 +178,11 @@ module.exports = {
         },
       },
     },
-    securitySchemes: {
-      BearerAuth: {
-        type: "string",
-        scheme: "Token",
-      },
-
-      Bearer: {
-        type: "string",
-        name: "Authorization",
-        in: "header"
+    "securityDefinitions": {
+      "Bearer": {
+          "type": "apiKey",
+          "name": "Authorization",
+          "in": "header"
       }
     },
 
@@ -804,25 +799,24 @@ module.exports = {
     "/messages/{id}": {
       get: {
         tags: ["Contact"],
+        security:[
+          {
+              Bearer: []
+          }
+      ],
         "summary": "Get a Message",
         description: "Get a Message",
         parameters: [
-          {
-            name: "id",
-            in: "path",
-            description: "Id of a Message",
-            required: true,
-            type: "string"
-          },
+          
           {
             "in": "header",
             "name": "Authorization",
             "description": "bearer token for user authorization",
             "required": true,
             "schema": {
-              "type": "string"
+                "type": "string"
             }
-          }
+        }
         ],
         responses: {
           200: {

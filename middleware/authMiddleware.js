@@ -1,6 +1,7 @@
 const jwt = require('jsonwebtoken');
-
+require("dotenv").config();
 module.exports = (req, res, next) => {
+  // console.log( req.params.id);
   const token = req.header('Authorization')
   if (!token) {
     return res.status(400).send("Access Denied! You need to login first or Sign up")
