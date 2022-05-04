@@ -807,16 +807,13 @@ module.exports = {
         "summary": "Get a Message",
         description: "Get a Message",
         parameters: [
-          
           {
-            "in": "header",
-            "name": "Authorization",
-            "description": "bearer token for user authorization",
-            "required": true,
-            "schema": {
-                "type": "string"
-            }
-        }
+            name: "id",
+            in: "path",
+            description: "Id of a Message",
+            required: true,
+            type: "string"
+          }
         ],
         responses: {
           200: {
