@@ -1,16 +1,18 @@
 const Blog =require("../Models/Blog.model");
-const Comment=require("../Models/Comment")
+
 
 // ADD A BLOG
 exports.addBlog=async (req,res)=>{
-    // console.log(req.userId);
     const {title,content,imageUrl,enableComments,tags,metaTitle,description}=req.body
     const err={};
     if(!title||title.trim().length===0){
          err.title="Enter title";
     }
     if(!content||content.trim().length===0){
-        err.title="Enter the content to Blog";
+        err.content="Enter the content to Blog";
+    }
+    if(!description||description.trim().length===0){
+        err.description="Enter the description";
     }
     if(!imageUrl||imageUrl.trim().length===0){
         err.coverImage="Enter a cover Image";
@@ -50,7 +52,7 @@ exports.getBlogs=async (req,res)=>{
 
 // GET A BLOG
 exports.getBlog=async(req,res)=>{
-    const blog = await Blog.findOne({_id: req.params.id});
+    const blog = await Blog.findById(req.params.id);
     return res.send(blog)
 }
 

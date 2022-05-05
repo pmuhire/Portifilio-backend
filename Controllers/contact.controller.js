@@ -8,7 +8,8 @@ exports.getMessages=async(req,res)=>{
     return res.send(messages);
 }
 exports.getMessage=async(req,res)=>{
-    const message = await Contact.findOne({id: req.params.id});
+    console.log(req.params.id);
+    const message = await Contact.findById(req.params.id);
     return res.send(message)
 }
 exports.deleteMessage=async(req,res)=>{

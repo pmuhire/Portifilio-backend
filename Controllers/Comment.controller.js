@@ -50,8 +50,17 @@ exports.createComment = async (req, res) => {
 exports.fetchComments = async (req, res) => {
 
     try {
-        const comments = await Comment.find()
-        return res.status(202).send(comments)
+        // const comments = await Comment.findById(req.query.blog_id)
+        const comments = await Comment.find();
+        comments.forEach((comment)=>{
+            if(comment.blog===req.query.blog_id){
+                return res.status(202).send(comment.blog);
+            }else{
+                return res.status(202).send("No comments");
+            }
+        })
+        // console.log(comments);
+        // return res.status(202).send(comments)
     } catch (err) {
         console.log(err)
         return res.status(500).json({ error: "Something went wrong" })
