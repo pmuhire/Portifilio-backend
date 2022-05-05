@@ -1,7 +1,8 @@
 require("dotenv").config();
 let chai = require("chai");
 let chaihttp = require("chai-http");
-let server = "https://my-brand-backend-app.herokuapp.com"
+// let server = require("../index");
+let server="localhost:1200"
 
 // Assertion  style
 chai.should();

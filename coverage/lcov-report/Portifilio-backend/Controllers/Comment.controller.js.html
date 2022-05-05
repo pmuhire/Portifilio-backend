@@ -23,16 +23,16 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">12.24% </span>
+                <span class="strong">11.11% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>6/49</span>
+                <span class='fraction'>5/45</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
                 <span class="strong">0% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>0/19</span>
+                <span class='fraction'>0/17</span>
             </div>
         
             
@@ -44,9 +44,9 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">12.24% </span>
+                <span class="strong">11.11% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>6/49</span>
+                <span class='fraction'>5/45</span>
             </div>
         
             
@@ -146,25 +146,11 @@
 <a name='L81'></a><a href='#L81'>81</a>
 <a name='L82'></a><a href='#L82'>82</a>
 <a name='L83'></a><a href='#L83'>83</a>
-<a name='L84'></a><a href='#L84'>84</a>
-<a name='L85'></a><a href='#L85'>85</a>
-<a name='L86'></a><a href='#L86'>86</a>
-<a name='L87'></a><a href='#L87'>87</a>
-<a name='L88'></a><a href='#L88'>88</a>
-<a name='L89'></a><a href='#L89'>89</a>
-<a name='L90'></a><a href='#L90'>90</a>
-<a name='L91'></a><a href='#L91'>91</a>
-<a name='L92'></a><a href='#L92'>92</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
+<a name='L84'></a><a href='#L84'>84</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
@@ -213,8 +199,6 @@
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -246,19 +230,13 @@
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">// const User = require('../../models/Users')
-const Blog = require('../Models/Blog.model')
+const Blog = require('../Models/Blog.model');
 const Comment = require('../Models/Comment')
-const User = require("../Models/User")
 &nbsp;
 exports.createComment = <span class="fstat-no" title="function not covered" >as</span>ync (req, res) =&gt; {
     const { text, image, user } = <span class="cstat-no" title="statement not covered" >req.body</span>
 <span class="cstat-no" title="statement not covered" >    if (!text || (text.trim().length === 0 &amp;&amp; !image)) {</span>
 <span class="cstat-no" title="statement not covered" >        return res.status(422).send({ error: 'enter something or comment image' })</span>
-    }
-&nbsp;
-    const theUser = <span class="cstat-no" title="statement not covered" >await User.find({ _id: user });</span>
-<span class="cstat-no" title="statement not covered" >    if (!theUser) {</span>
-<span class="cstat-no" title="statement not covered" >        return res.status(404).json({ error: 'First signup' })</span>
     }
 <span class="cstat-no" title="statement not covered" >    try {</span>
         const blog = <span class="cstat-no" title="statement not covered" >await Blog.find({ _id: req.params.id });</span>
@@ -276,7 +254,7 @@ exports.createComment = <span class="fstat-no" title="function not covered" >as<
         }
 &nbsp;
         const createComment = <span class="cstat-no" title="statement not covered" >new Comment({</span>
-            user: user,
+            user: req.user._id,
             blog: req.params.id,
             body,
         })
@@ -306,8 +284,6 @@ exports.fetchComments = <span class="fstat-no" title="function not covered" >as<
 <span class="cstat-no" title="statement not covered" >                return res.status(202).send("No comments");</span>
             }
         })
-        // console.log(comments);
-        // return res.status(202).send(comments)
     } catch (err) {
 <span class="cstat-no" title="statement not covered" >        console.log(err)</span>
 <span class="cstat-no" title="statement not covered" >        return res.status(500).json({ error: "Something went wrong" })</span>
@@ -343,7 +319,7 @@ exports.likeDislikeComment = <span class="fstat-no" title="function not covered"
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at Thu May 05 2022 19:10:20 GMT+0200 (South Africa Standard Time)
+                at Thu May 05 2022 21:06:23 GMT+0200 (South Africa Standard Time)
             </div>
         <script src="../../prettify.js"></script>
         <script>

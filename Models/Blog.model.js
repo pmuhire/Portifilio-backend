@@ -5,18 +5,6 @@ const schema=Schema({
         type:Array,
         required:true
     },
-    enableComments:{
-        type:Boolean,
-        required:true
-    },
-    metaTitle:{
-       type:String
-    },
-    creator:{
-        type:Schema.Types.ObjectId,
-        ref:"User",
-        required: true
-    },
     title:{
         type:String,
         required:true,
@@ -34,6 +22,21 @@ const schema=Schema({
         required:true,
     },
     likes: [{ type: Schema.Types.ObjectId, ref: 'User' }],
-    comments: [{ type: Schema.Types.ObjectId, ref: 'Comment' }]
+    comments: [{
+        userId: {
+            type: String
+        },
+        body: {
+            image: String,
+            text: {
+              type: String,
+              trim: true,
+            },
+          },
+        date: {
+            type: String,
+            default: new Date().toLocaleDateString()
+        }
+      }]
 })
 module.exports=model("Blog",schema);

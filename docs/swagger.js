@@ -110,7 +110,10 @@ module.exports = {
           },
         },
       },
-
+      comment:{
+        "text":"string",
+        "image":"string"
+      },
       // TOKEN
       Token: {
         "type": "object",
@@ -150,7 +153,7 @@ module.exports = {
           }
         },
       },
-      "Login": {
+      Login: {
         "type": "object",
         "properties": {
           "email": {
@@ -581,11 +584,11 @@ module.exports = {
         },
       },
     },
-    "/blogs/{blog_id}/comments": {
-      get: {
+    "/blogs/{id}/comments": {
+      patch: {
         tags: ["Blogs"],
-        "summary": "Get a Blog comments",
-        description: "Get a Blog",
+        "summary": "Add a comment",
+        description: "Add a comment",
         parameters: [
           {
             name: "id",
@@ -604,13 +607,22 @@ module.exports = {
             }
           }
         ],
+        // requestBody: {
+        //   // expected request body
+        //   content: {
+        //     // content-type
+        //     "application/json": {
+        //       $ref: "#/components/schemas/comment",
+        //     },
+        //   },
+        // },
         responses: {
           200: {
             description: "Blog comments were obtained",
             content: {
               "application/json": {
                 schema: {
-                  $ref: "#/components/schemas/Blog",
+                  $ref: "#/components/schemas/comment",
                 },
               },
             },
@@ -618,8 +630,8 @@ module.exports = {
         },
       },
     },
-    "/blogs/{id}/likes": {
-      get: {
+    "/blogs/blogId/likes": {
+      patch: {
         tags: ["Blogs"],
         "summary": "Get a Blog likes",
         description: "Get a Blog likes",

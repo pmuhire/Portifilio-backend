@@ -13,7 +13,7 @@ module.exports = (req, res, next) => {
         return res.status(400).send("Invalid Token")
       }
       else {
-        // console.log(decoded);
+        req.user=decoded._id;
         next()
       }
     })
