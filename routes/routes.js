@@ -5,7 +5,8 @@ const authMiddleware=require("../middleware/authMiddleware");
 const {userSignup,getUser,getUsers,deleteUser,editUser}=require("../Controllers/User.controller");
 router.post("/user",userSignup);
 router.get("/users",authMiddleware,getUsers);
-router.get("/users/:id",authMiddleware,getUser);
+router.get("/users/test",authMiddleware,getUsers);
+router.get("/users/:id",getUser);
 router.delete("/users/delete/:id",authMiddleware,deleteUser);
 router.patch("/users/update/:id",authMiddleware,editUser);
 
@@ -34,7 +35,8 @@ const {
   router.delete("/messages/delete/:id",authMiddleware,deleteMessage);
 
   // COMMENTS
-  const {createComment} =require("../Controllers/Comment.controller")
+  const {createComment,fetchComments} =require("../Controllers/Comment.controller")
   router.post("/blogs/:id/comment",authMiddleware,createComment);
+  router.post("/blogs/?blog_id/comments",authMiddleware,fetchComments);
 
 module.exports=router;

@@ -1,4 +1,6 @@
 [![CircleCI](https://circleci.com/gh/pmuhire/Portifilio-backend.svg?style=shield)](https://circleci.com/gh/circleci/circleci-docs)
+
+[![codecov.io](https://codecov.io/github/pmuhire/Portifilio-backend/coverage.svg?branch=main)](https://codecov.io/github/pmuhire/Portifilio-backend)
 <div align="center">
   <h3 align="center">Portfolio Backend</h3>
 </div>

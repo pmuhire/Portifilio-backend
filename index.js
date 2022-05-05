@@ -11,6 +11,10 @@ const {corsFunction} = require("./utils/cors")
 mongoose.connect(process.env.MONGODB_URI, {
     useNewUrlParser: false,
 }).then(()=>{
+}).catch(err=>{
+    console.log(err);
+})
+
     const app=express();
 
     app.use(cors());
@@ -19,9 +23,8 @@ mongoose.connect(process.env.MONGODB_URI, {
     app.use('/api-docs',swaggerUiExpress.serve,swaggerUiExpress.setup(docs));
     app.use("/api",router);
 
-    app.listen(process.env.PORT||5000,()=>{
+    module.exports=app.listen(process.env.PORT||5000,()=>{
         console.log("Server up and running");
     })
-    module.exports=app
-})
+
 

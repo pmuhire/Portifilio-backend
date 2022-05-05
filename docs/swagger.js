@@ -9,7 +9,7 @@ module.exports = {
     contact: {
       name: "Muhire Patrick", // your name
       email: "pmuhire2002@gmail.com", // your email
-      url: "https://pmuhire.github.io/portifolio.io/", // your website
+      url: "https://my-brand-fk2zx5usg-pmuhire.vercel.app/", // your website
     },
   },
   servers: [
@@ -177,15 +177,8 @@ module.exports = {
           },
         },
       },
+      
     },
-    "securityDefinitions": {
-      "Bearer": {
-          "type": "apiKey",
-          "name": "Authorization",
-          "in": "header"
-      }
-    },
-
   },
   paths: {
     //  USERS APIs DOCUMENTATION
@@ -196,13 +189,10 @@ module.exports = {
         description: "Get Users",
         parameters: [
           {
-            "in": "header",
+            "in": "query",
             "name": "Authorization",
             "description": "bearer token for user authorization",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
+            "required": true
           }
         ],
         responses: {
@@ -232,17 +222,7 @@ module.exports = {
         "produces": [
           "application/json"
         ],
-        "parameters": [
-          // {
-          // "in": "body",
-          // "name": "body",
-          // "description": "User object that needs to be added to the database",
-          // "required": true,
-          // "schema": {
-          //     $ref: "#/components/schemas/User",
-          // }
-          // }
-        ],
+        "parameters": [],
         requestBody: {
           // expected request body
           content: {
@@ -267,13 +247,10 @@ module.exports = {
       },
     },
     "/users/update/{id}": {
-      "put": {
+      "patch": {
         "tags": [
           "Users"
         ],
-        "security": {
-          "Bearer": []
-        },
         "summary": "Update existing User",
         "description": "Update existing User",
         "consumes": [
@@ -299,12 +276,12 @@ module.exports = {
               $ref: "#/components/schemas/User",
             }
           },{
-            "in": "header",
+            "in": "query",
             "name": "Authorization",
             "description": "bearer token for user authorization",
             "required": true,
-            "schema": {
-              "type": "string"
+            "schema":{
+              type: "string"
             }
           }],
         responses: {
@@ -337,12 +314,12 @@ module.exports = {
             type: "string"
           },
           {
-            "in": "header",
+            "in": "query",
             "name": "Authorization",
             "description": "bearer token for user authorization",
             "required": true,
-            "schema": {
-              "type": "string"
+            "schema":{
+              type: "string"
             }
           }
         ],
@@ -382,12 +359,12 @@ module.exports = {
             type: "string"
           },
           {
-            "in": "header",
+            "in": "query",
             "name": "Authorization",
             "description": "bearer token for user authorization",
             "required": true,
-            "schema": {
-              "type": "string"
+            "schema":{
+              type: "string"
             }
           }],
         responses: {
@@ -443,12 +420,12 @@ module.exports = {
         ],
         "parameters": [
           {
-            "in": "header",
+            "in": "query",
             "name": "Authorization",
             "description": "bearer token for user authorization",
             "required": true,
-            "schema": {
-              "type": "string"
+            "schema":{
+              type: "string"
             }
           }
         ],
@@ -506,12 +483,12 @@ module.exports = {
             }
           },
           {
-            "in": "header",
+            "in": "query",
             "name": "Authorization",
             "description": "bearer token for user authorization",
             "required": true,
-            "schema": {
-              "type": "string"
+            "schema":{
+              type: "string"
             }
           }],
         responses: {
@@ -580,12 +557,12 @@ module.exports = {
             type: "string"
           },
           {
-            "in": "header",
+            "in": "query",
             "name": "Authorization",
             "description": "bearer token for user authorization",
             "required": true,
-            "schema": {
-              "type": "string"
+            "schema":{
+              type: "string"
             }
           }],
         responses: {
@@ -604,7 +581,7 @@ module.exports = {
         },
       },
     },
-    "/blogs/{id}/comments": {
+    "/blogs/{blog_id}/comments": {
       get: {
         tags: ["Blogs"],
         "summary": "Get a Blog comments",
@@ -612,18 +589,18 @@ module.exports = {
         parameters: [
           {
             name: "id",
-            in: "path",
+            in: "query",
             description: "Id of a Blog",
             required: true,
             type: "string"
           },
           {
-            "in": "header",
+            "in": "query",
             "name": "Authorization",
             "description": "bearer token for user authorization",
             "required": true,
-            "schema": {
-              "type": "string"
+            "schema":{
+              type: "string"
             }
           }
         ],
@@ -655,12 +632,12 @@ module.exports = {
             type: "string"
           },
           {
-            "in": "header",
+            "in": "query",
             "name": "Authorization",
             "description": "bearer token for user authorization",
             "required": true,
-            "schema": {
-              "type": "string"
+            "schema":{
+              type: "string"
             }
           }
         ],
@@ -726,12 +703,12 @@ module.exports = {
         description: "Get Messages",
         parameters: [
           {
-            "in": "header",
+            "in": "query",
             "name": "Authorization",
             "description": "bearer token for user authorization",
             "required": true,
-            "schema": {
-              "type": "string"
+            "schema":{
+              type: "string"
             }
           }
         ],
@@ -764,12 +741,12 @@ module.exports = {
         ],
         "parameters": [
           {
-            "in": "header",
+            "in": "query",
             "name": "Authorization",
             "description": "bearer token for user authorization",
             "required": true,
-            "schema": {
-              "type": "string"
+            "schema":{
+              type: "string"
             }
           }
         ],
@@ -813,6 +790,15 @@ module.exports = {
             description: "Id of a Message",
             required: true,
             type: "string"
+          },
+          {
+            "in": "query",
+            "name": "Authorization",
+            "description": "bearer token for user authorization",
+            "required": true,
+            "schema":{
+              type: "string"
+            }
           }
         ],
         responses: {
@@ -851,12 +837,12 @@ module.exports = {
             type: "string"
           },
           {
-            "in": "header",
+            "in": "query",
             "name": "Authorization",
             "description": "bearer token for user authorization",
             "required": true,
-            "schema": {
-              "type": "string"
+            "schema":{
+              type: "string"
             }
           }],
         responses: {

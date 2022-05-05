@@ -26,7 +26,7 @@ exports.auth = async (req, res) => {
       },
       process.env.jwtPrivateKey
     );
-    res.send({
+    return res.send({
       authToken: token,
     });
     //  console.log(token);

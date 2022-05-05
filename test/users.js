@@ -1,7 +1,7 @@
 require("dotenv").config();
 let chai = require("chai");
 let chaihttp = require("chai-http");
-let server = `https://my-brand-backend-app.herokuapp.com`;
+let server = require("../index");
 
 // Assertion  style
 chai.should();
@@ -17,7 +17,7 @@ describe("Users  APIs", () => {
       chai
         .request(server)
         .get("/api/users")
-        .set({Authorization:"Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MjZhMzNmMDVlMzMxYTQ3NjdkY2M1YTYiLCJlbWFpbCI6InBtdWhpcmUyMDAzQGdtYWlsLmNvbSIsInBhc3N3b3JkIjoiJDJiJDEwJHlZV1c1RGZEYTFVeEMudWpDdXEzaWUzZVpnVWN3MFhrdlJqVlYwLjlCSVhqc3lsR2RmSjhlIiwiaWF0IjoxNjUxMjc0NDg1fQ.gddMOjBlw42ABmynQzUx0SszppalcsnJiymcK124OCU"})
+        .query({Authorization: "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MjY3ZDgyN2Y3Mjk2OWI0ZjFhZTQ1MGQiLCJlbWFpbCI6InBtdWhpcmUyMDAyQGdtYWlsLmNvbSIsInBhc3N3b3JkIjoiJDJiJDEwJHJQSENxdzZ3Uy9uaEE3ck5veFVvOXVweEUuMVRyeEFkNTN5dHBLZ2RCTGVEL2xsc3cuZ2dlIiwiaWF0IjoxNjUxNzY3MjE1fQ.L9rL9emG8ySh_aOmAUh70kftI-trfy1dw18DkkE_aXk"})
         .end((err, res) => {
           res.should.have.status(200);
           res.body.should.be.a("array");
@@ -39,11 +39,11 @@ describe("Users  APIs", () => {
    */
   describe("Get /api/users/:id", () => {
     it("It should GET a requested user", (done) => {
-      const userId = "6267d827f72969b4f1ae450d";
+      const userId = "626c5bb77aa298882cdf7617";
       chai
         .request(server)
         .get("/api/users/" + userId)
-        .set({Authorization:"Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MjZhMzNmMDVlMzMxYTQ3NjdkY2M1YTYiLCJlbWFpbCI6InBtdWhpcmUyMDAzQGdtYWlsLmNvbSIsInBhc3N3b3JkIjoiJDJiJDEwJHlZV1c1RGZEYTFVeEMudWpDdXEzaWUzZVpnVWN3MFhrdlJqVlYwLjlCSVhqc3lsR2RmSjhlIiwiaWF0IjoxNjUxMjc0NDg1fQ.gddMOjBlw42ABmynQzUx0SszppalcsnJiymcK124OCU"})
+        .query({Authorization: "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MjY3ZDgyN2Y3Mjk2OWI0ZjFhZTQ1MGQiLCJlbWFpbCI6InBtdWhpcmUyMDAyQGdtYWlsLmNvbSIsInBhc3N3b3JkIjoiJDJiJDEwJHJQSENxdzZ3Uy9uaEE3ck5veFVvOXVweEUuMVRyeEFkNTN5dHBLZ2RCTGVEL2xsc3cuZ2dlIiwiaWF0IjoxNjUxNzY3MjE1fQ.L9rL9emG8ySh_aOmAUh70kftI-trfy1dw18DkkE_aXk"})
         .end((err, res) => {
           res.should.have.status(200);
           res.body.should.be.a("object");
@@ -119,24 +119,21 @@ describe("Users  APIs", () => {
    */
    describe("PATCH /api/users/update/:id", () => {
     it("It should UPDATE a  user", (done) => {
-      const token= "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MjY3ZDgyN2Y3Mjk2OWI0ZjFhZTQ1MGQiLCJlbWFpbCI6InBtdWhpcmUyMDAyQGdtYWlsLmNvbSIsInBhc3N3b3JkIjoiJDJiJDEwJHJQSENxdzZ3Uy9uaEE3ck5veFVvOXVweEUuMVRyeEFkNTN5dHBLZ2RCTGVEL2xsc3cuZ2dlIiwiaWF0IjoxNjUxMjcwNTM1fQ.ih7IofJGEjU3bNt5ep5_3Cs2SrlQRWmwHQbNi0Ji4ts"
-      const userId="626798b15a1dcfe2cbd3753b"
+      const userId="626ad91dc71b24f521f64cdd"
       const user = {
         fullNames: "Rwantambara Dismas updated 2"
       };
       chai
         .request(server)
         .patch("/api/users/update/"+userId)
-        .set({Authorization:"Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MjZhMzNmMDVlMzMxYTQ3NjdkY2M1YTYiLCJlbWFpbCI6InBtdWhpcmUyMDAzQGdtYWlsLmNvbSIsInBhc3N3b3JkIjoiJDJiJDEwJHlZV1c1RGZEYTFVeEMudWpDdXEzaWUzZVpnVWN3MFhrdlJqVlYwLjlCSVhqc3lsR2RmSjhlIiwiaWF0IjoxNjUxMjc0NDg1fQ.gddMOjBlw42ABmynQzUx0SszppalcsnJiymcK124OCU"})
+        .query({Authorization: "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MjY3ZDgyN2Y3Mjk2OWI0ZjFhZTQ1MGQiLCJlbWFpbCI6InBtdWhpcmUyMDAyQGdtYWlsLmNvbSIsInBhc3N3b3JkIjoiJDJiJDEwJHJQSENxdzZ3Uy9uaEE3ck5veFVvOXVweEUuMVRyeEFkNTN5dHBLZ2RCTGVEL2xsc3cuZ2dlIiwiaWF0IjoxNjUxNzY3MjE1fQ.L9rL9emG8ySh_aOmAUh70kftI-trfy1dw18DkkE_aXk"})
         .send(user)
         .end((err, res) => {
           res.should.have.status(200);
           res.body.should.be.a("object");
           res.body.should.have.property("_id").eq(userId);
-          res.body.should.have.property("__v");
           res.body.should.have.property("fullNames").eq("Rwantambara Dismas updated 2");
-          res.body.should.have.property("userName").eq("Rwantambara");
-          res.body.should.have.property("email").eq("rwantambara@gmail.com");
+
           done();
         });
     });
@@ -145,20 +142,19 @@ describe("Users  APIs", () => {
   /**
    * Test the Delete route
    */
-   describe("Delete /api/users/delete/id", () => {
-    it("It should Delete a  user", (done) => {
-      const token= "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MjY3ZDgyN2Y3Mjk2OWI0ZjFhZTQ1MGQiLCJlbWFpbCI6InBtdWhpcmUyMDAyQGdtYWlsLmNvbSIsInBhc3N3b3JkIjoiJDJiJDEwJHJQSENxdzZ3Uy9uaEE3ck5veFVvOXVweEUuMVRyeEFkNTN5dHBLZ2RCTGVEL2xsc3cuZ2dlIiwiaWF0IjoxNjUxMjcwNTM1fQ.ih7IofJGEjU3bNt5ep5_3Cs2SrlQRWmwHQbNi0Ji4ts"
-      const userId="626798b15a1dcfe2cbd3753b"
-      chai
-        .request(server)
-        .delete("/api/users/delete/"+userId)
-        .set({Authorization:"Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MjZhMzNmMDVlMzMxYTQ3NjdkY2M1YTYiLCJlbWFpbCI6InBtdWhpcmUyMDAzQGdtYWlsLmNvbSIsInBhc3N3b3JkIjoiJDJiJDEwJHlZV1c1RGZEYTFVeEMudWpDdXEzaWUzZVpnVWN3MFhrdlJqVlYwLjlCSVhqc3lsR2RmSjhlIiwiaWF0IjoxNjUxMjc0NDg1fQ.gddMOjBlw42ABmynQzUx0SszppalcsnJiymcK124OCU"})
-        .end((err, res) => {
-          res.should.have.status(200);
-          done();
-        });
-    });
-  });
+  //  describe("Delete /api/users/delete/id", () => {
+  //   it("It should Delete a  user", (done) => {
+  //     const userId="6267d827f72969b4f1ae450d"
+  //     chai
+  //       .request(server)
+  //       .delete("/api/users/delete/"+userId)
+  //       .query({Authorization: "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MjY3ZDgyN2Y3Mjk2OWI0ZjFhZTQ1MGQiLCJlbWFpbCI6InBtdWhpcmUyMDAyQGdtYWlsLmNvbSIsInBhc3N3b3JkIjoiJDJiJDEwJHJQSENxdzZ3Uy9uaEE3ck5veFVvOXVweEUuMVRyeEFkNTN5dHBLZ2RCTGVEL2xsc3cuZ2dlIiwiaWF0IjoxNjUxNzY3MjE1fQ.L9rL9emG8ySh_aOmAUh70kftI-trfy1dw18DkkE_aXk"})
+  //       .end((err, res) => {
+  //         res.should.have.status(200);
+  //         done();
+  //       });
+  //   });
+  // });
 });
 
 
