@@ -17,6 +17,8 @@ const {
     getBlogs,
     deleteBlog,
     editBlog,
+    commentOnBlog,
+    likeDislikeBlog
   } = require("../Controllers/Blogs.controller");
   
   router.post("/blog",authMiddleware, addBlog);
@@ -24,6 +26,8 @@ const {
   router.get("/blogs/:id", getBlog);
   router.delete("/blogs/delete/:id",authMiddleware, deleteBlog);
   router.patch("/blogs/update/:id",authMiddleware, editBlog);
+  router.patch("/blogs/:id/comments",authMiddleware,commentOnBlog);
+  router.patch("/blogs/:id/likes",authMiddleware,likeDislikeBlog);
 
   const {auth}=require("../Controllers/auth.controller")
   router.post("/login",auth);
@@ -34,9 +38,6 @@ const {
   router.post("/message",authMiddleware,postMessage);
   router.delete("/messages/delete/:id",authMiddleware,deleteMessage);
 
-  // COMMENTS
-  const {createComment,fetchComments} =require("../Controllers/Comment.controller")
-  router.post("/blogs/:id/comment",authMiddleware,createComment);
-  router.post("/blogs/?blog_id/comments",authMiddleware,fetchComments);
+
 
 module.exports=router;

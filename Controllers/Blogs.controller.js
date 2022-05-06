@@ -3,7 +3,7 @@ const Blog =require("../Models/Blog.model");
 
 // ADD A BLOG
 exports.addBlog=async (req,res)=>{
-    const {title,content,imageUrl,enableComments,tags,metaTitle,description}=req.body
+    const {title,content,imageUrl,tags,description}=req.body
     const err={};
     if(!title||title.trim().length===0){
          err.title="Enter title";
@@ -30,10 +30,7 @@ exports.addBlog=async (req,res)=>{
             title:title,
             content:content,
             imageUrl:imageUrl,
-            creator:req.userId,
             tags:tags,
-            metaTitle:metaTitle,
-            enableComments:enableComments,
             description: description
         })
         await registerBlog.save();
@@ -53,6 +50,9 @@ exports.getBlogs=async (req,res)=>{
 // GET A BLOG
 exports.getBlog=async(req,res)=>{
     const blog = await Blog.findById(req.params.id);
+    if(!blog){
+        return res.send("Blog does not exist");
+    }
     return res.send(blog)
 }
 
@@ -60,6 +60,9 @@ exports.getBlog=async(req,res)=>{
 exports.editBlog=async (req,res)=>{
     try {
         const blog = await Blog.findByIdAndUpdate({ _id: req.params.id })
+        if(!blog){
+            return res.send("Blog does not exist");
+        }
     
         if (req.body.title) {
             blog.title = req.body.title
@@ -82,10 +85,11 @@ exports.editBlog=async (req,res)=>{
 
 exports.deleteBlog=async(req,res)=>{
     try {
-        console.log(req.params.id);
         const blog= await Blog.findByIdAndRemove({ _id: req.params.id })
-        console.log(blog);
-        res.status(204).send(blog);
+        if(!blog){
+            return res.send("Blog does not exist");
+        }
+        res.status(204).send({status:"Deleted"});
     } catch {
         res.status(404)
         res.send({ error: "Blog doesn't exist!" })
@@ -95,12 +99,12 @@ exports.deleteBlog=async(req,res)=>{
 // ADD LIKE 
 exports.likeDislikeBlog = async (req, res) => {
     try {
-      const blog = await Blog.findById(req.params.blogId)
+      const blog = await Blog.findById(req.params.id)
       if (!blog) {
         return res.status(404).json({ error: 'Blog not found' })
       }
   
-      const index = blog.likes.indexOf(req.userId)
+      const index = blog.likes.indexOf(req.user._id);
       if (index !== -1) {
         blog.likes.splice(index, 1)
         await blog.save()
@@ -108,11 +112,48 @@ exports.likeDislikeBlog = async (req, res) => {
         return;
       }
   
-      blog.likes.push(req.userId)
+      blog.likes.push(req.user._id);
       await blog.save()
       return res.status(200).send({ message: 'add like'})
     } catch (err) {
       console.log(err)
       return res.status(500).send({error:"Something went wrong"})
+    }
+  }
+//   COMMENT ON BLOG
+
+exports.commentOnBlog = async(req,res)=>{
+    const { text, image} = req.body;
+    // const text=req.body.text;
+    let body = {}
+        if (image) {
+            body.image = image
+        }
+
+        if (text) {
+            body.text = text
+        }
+    const comment={
+        userId: req.user._id,
+        body: body
+        
+    }
+    if (!text || (text.trim().length === 0 && !image)) {
+        return res.status(422).send({ error: 'enter something or comment image' })
+    }
+    if(req.user.user_id){
+        return res.status(422).send("First Login Or Sign up");
+    }
+    try {
+        const blog = await Blog.find({ _id: req.params.id });
+        if (blog) {
+            await Blog.findOneAndUpdate({_id:req.params.id},{
+                $push: {Comments: comment}
+            })
+            return res.send("Comment added successfully!");
+        }
+        return res.status(400).send({error: "Blog does not exist"});
+    }catch(err){
+        console.log(err);
     }
   }

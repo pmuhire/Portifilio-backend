@@ -1,17 +1,11 @@
 // const User = require('../../models/Users')
-const Blog = require('../Models/Blog.model')
+const Blog = require('../Models/Blog.model');
 const Comment = require('../Models/Comment')
-const User = require("../Models/User")
 
 exports.createComment = async (req, res) => {
-    const { text, image, user } = req.body
+    const { text, image} = req.body
     if (!text || (text.trim().length === 0 && !image)) {
         return res.status(422).send({ error: 'enter something or comment image' })
-    }
-
-    const theUser = await User.find({ _id: user });
-    if (!theUser) {
-        return res.status(404).json({ error: 'First signup' })
     }
     try {
         const blog = await Blog.find({ _id: req.params.id });
@@ -29,7 +23,7 @@ exports.createComment = async (req, res) => {
         }
 
         const createComment = new Comment({
-            user: user,
+            user: req.user._id,
             blog: req.params.id,
             body,
         })
@@ -59,8 +53,6 @@ exports.fetchComments = async (req, res) => {
                 return res.status(202).send("No comments");
             }
         })
-        // console.log(comments);
-        // return res.status(202).send(comments)
     } catch (err) {
         console.log(err)
         return res.status(500).json({ error: "Something went wrong" })
