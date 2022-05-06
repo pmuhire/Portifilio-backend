@@ -2,8 +2,8 @@
 require("dotenv").config();
 let chai = require("chai");
 let chaihttp = require("chai-http");
-// let server = require("../index");
-let server="localhost:1200"
+let server = require("../index");
+// let server="localhost:1200"
 
 chai.should();
 chai.use(chaihttp);

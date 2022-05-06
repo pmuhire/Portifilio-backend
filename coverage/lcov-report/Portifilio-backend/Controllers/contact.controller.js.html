@@ -23,9 +23,9 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">52.5% </span>
+                <span class="strong">72.5% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>21/40</span>
+                <span class='fraction'>29/40</span>
             </div>
         
             
@@ -37,16 +37,16 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">71.42% </span>
+                <span class="strong">85.71% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>5/7</span>
+                <span class='fraction'>6/7</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">53.84% </span>
+                <span class="strong">74.35% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>21/39</span>
+                <span class='fraction'>29/39</span>
             </div>
         
             
@@ -174,6 +174,18 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
@@ -182,14 +194,18 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -200,27 +216,11 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
@@ -255,20 +255,20 @@ exports.postMessage=async(req,res)=&gt;{
     <span class="missing-if-branch" title="if path not taken" >I</span>if (error) <span class="cstat-no" title="statement not covered" >return res.send(error.details[0].message).status(400);</span>
 &nbsp;
     await User.findOne({ email: email}).then(async (user) =&gt; {
-        <span class="missing-if-branch" title="else path not taken" >E</span>if (!user) {
-            return res.send("First signup ").status(400);
+        <span class="missing-if-branch" title="if path not taken" >I</span>if (!user) {
+<span class="cstat-no" title="statement not covered" >            return res.send("First signup ").status(400);</span>
         }
-<span class="cstat-no" title="statement not covered" >        try{</span>
-             const newMessage=<span class="cstat-no" title="statement not covered" >new Contact({</span>
+        try{
+             const newMessage=new Contact({
                 names:names,
                 phone:phone,
                 email:email,
                 message:message
              })
-<span class="cstat-no" title="statement not covered" >            await newMessage.save();</span>
-<span class="cstat-no" title="statement not covered" >            mainMail(names,email,message);</span>
+            await newMessage.save();
+            mainMail(names,email,message);
             
-<span class="cstat-no" title="statement not covered" >          res.send(newMessage);</span>
+          res.send(newMessage);
         }catch(err){
 <span class="cstat-no" title="statement not covered" >            console.log(err);</span>
 <span class="cstat-no" title="statement not covered" >            return res.status(500).json({error:"Something went wrong"})</span>
@@ -284,15 +284,15 @@ function validate(req) {
     });
     return schema.validate(req);
 }
-async function <span class="fstat-no" title="function not covered" >mainMail(</span>name, email, message) {
-    const transporter = <span class="cstat-no" title="statement not covered" >await nodemailer.createTransport({</span>
+async function mainMail(name, email, message) {
+    const transporter = await nodemailer.createTransport({
         service: "Gmail",
         auth: {
             user: process.env.email,
             pass: process.env.secret
         },
     });
-    const mailOption = <span class="cstat-no" title="statement not covered" >{</span>
+    const mailOption = {
         from: email,
         to: process.env.email,
         subject:"Message from User",
@@ -301,8 +301,8 @@ async function <span class="fstat-no" title="function not covered" >mainMail(</s
             Name: ${name}
             Message: ${message}`,
     };
-<span class="cstat-no" title="statement not covered" >    try {</span>
-<span class="cstat-no" title="statement not covered" >        await transporter.sendMail(mailOption);</span>
+    try {
+        await transporter.sendMail(mailOption);
 <span class="cstat-no" title="statement not covered" >        return Promise.resolve("Message Sent Successfully!");</span>
     } catch (error) {
 <span class="cstat-no" title="statement not covered" >        console.log(error)</span>
@@ -316,7 +316,7 @@ async function <span class="fstat-no" title="function not covered" >mainMail(</s
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at Thu May 05 2022 21:39:51 GMT+0200 (South Africa Standard Time)
+                at Fri May 06 2022 20:42:52 GMT+0200 (South Africa Standard Time)
             </div>
         <script src="../../prettify.js"></script>
         <script>

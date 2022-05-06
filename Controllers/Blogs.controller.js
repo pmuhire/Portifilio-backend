@@ -99,7 +99,7 @@ exports.deleteBlog=async(req,res)=>{
 // ADD LIKE 
 exports.likeDislikeBlog = async (req, res) => {
     try {
-      const blog = await Blog.findById(req.params.blogId)
+      const blog = await Blog.findById(req.params.id)
       if (!blog) {
         return res.status(404).json({ error: 'Blog not found' })
       }
@@ -112,7 +112,7 @@ exports.likeDislikeBlog = async (req, res) => {
         return;
       }
   
-      blog.likes.push(req.user.user_id);
+      blog.likes.push(req.user._id);
       await blog.save()
       return res.status(200).send({ message: 'add like'})
     } catch (err) {
@@ -124,6 +124,7 @@ exports.likeDislikeBlog = async (req, res) => {
 
 exports.commentOnBlog = async(req,res)=>{
     const { text, image} = req.body;
+    // const text=req.body.text;
     let body = {}
         if (image) {
             body.image = image
@@ -134,8 +135,8 @@ exports.commentOnBlog = async(req,res)=>{
         }
     const comment={
         userId: req.user._id,
-        text: text,
-        image: image
+        body: body
+        
     }
     if (!text || (text.trim().length === 0 && !image)) {
         return res.status(422).send({ error: 'enter something or comment image' })
@@ -147,7 +148,7 @@ exports.commentOnBlog = async(req,res)=>{
         const blog = await Blog.find({ _id: req.params.id });
         if (blog) {
             await Blog.findOneAndUpdate({_id:req.params.id},{
-                $push: {Comment: comment}
+                $push: {Comments: comment}
             })
             return res.send("Comment added successfully!");
         }
