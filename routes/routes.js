@@ -38,6 +38,7 @@ const {
   router.post("/message",authMiddleware,postMessage);
   router.delete("/messages/delete/:id",authMiddleware,deleteMessage);
 
-
+  const {getTags}=require("../Controllers/getTags.controller");
+  router.get("/tags",getTags);
 
 module.exports=router;
