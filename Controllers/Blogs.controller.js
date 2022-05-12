@@ -1,9 +1,17 @@
 const Blog =require("../Models/Blog.model");
+const cloudinary=require('cloudinary');
+
 
 
 // ADD A BLOG
 exports.addBlog=async (req,res)=>{
-    const {title,content,imageUrl,tags,description}=req.body
+    cloudinary.config({ 
+        cloud_name: process.env.CLOUDINARY_USER_NAME, 
+        api_key: process.env.CLOUDINARY_API_KEY, 
+        api_secret: process.env.CLOUDINARY_API_SECRET,
+        secure: true
+    });
+    const {title,content,imageUrl,tags,description}=req.body;
     const err={};
     if(!title||title.trim().length===0){
          err.title="Enter title";
@@ -21,15 +29,16 @@ exports.addBlog=async (req,res)=>{
        err.tag="Enter atleast three tags";
    }
    if(Object.keys(err).length){
-    return res.status(422).json({err});
+    return res.json({err});
    }
    try{
         const blog=await Blog.findOne({title});
         if(blog) res.status(400).json({error:"Change title"})
+        const result = await cloudinary.uploader.upload(imageUrl);
         const registerBlog=new Blog({
             title:title,
             content:content,
-            imageUrl:imageUrl,
+            imageUrl:result.secure_url,
             tags:tags,
             description: description
         })

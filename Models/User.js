@@ -1,7 +1,8 @@
+const {  boolean } = require('joi');
 const mongoose =require('mongoose');
 require('mongoose-type-email');
 
-const userSchema=new mongoose.Schema({
+const userSchema= new mongoose.Schema({
     fullNames:{
         type: String,
         required:true,
@@ -25,6 +26,14 @@ const userSchema=new mongoose.Schema({
     },
     profile_pic:{
         type: String
+    },
+    isAdmin:{
+        type: Boolean,
+        default: false
+    },
+    date: {
+        type: String,
+        default: new Date().toLocaleDateString()
     }
 
 })
